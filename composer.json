@@ -17,5 +17,5 @@
   "require": {
     "crocos/cloudinary": "*",
     "twig/twig": "1.*"
-  },
+  }
 }

@@ -17,7 +17,7 @@ class CloudinaryExtensionTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorException()
     {
-        $ext = new CloudinaryExtension([]);
+        $ext = new CloudinaryExtension(array(null));
     }
 
     public function testGetUrl()

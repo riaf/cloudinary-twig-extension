@@ -12,10 +12,18 @@ class CloudinaryExtensionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('cloudinary', $ext->getName());
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testConstructorException()
+    {
+        $ext = new CloudinaryExtension([]);
+    }
+
     public function testGetUrl()
     {
         $cloudinary = new CloudinaryResource('test123');
-        $ext = new CloudinaryExtension('test123');
+        $ext = new CloudinaryExtension($cloudinary);
 
         $this->assertEquals(
             $cloudinary->getUrl('test'),
@@ -45,5 +53,18 @@ class CloudinaryExtensionTest extends PHPUnit_Framework_TestCase
             $cloudinary->getUrl('http://example.com/?hoge=fuga', array('type' => 'fetch')),
             $ext->getFetchUrl('http://example.com/?hoge=fuga')
         );
+    }
+
+    public function testCloudinary()
+    {
+        $cloudinary = new CloudinaryResource('test123');
+        $ext = new CloudinaryExtension($cloudinary);
+
+        $this->assertTrue($ext->getCloudinary() instanceof CloudinaryResource);
+
+        $cloudinary2 = new CloudinaryResource('test456');
+        $ext->setCloudinary($cloudinary2);
+
+        $this->assertEquals($cloudinary2, $ext->getCloudinary());
     }
 }

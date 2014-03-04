@@ -19,11 +19,17 @@ class CloudinaryExtension extends \Twig_Extension
     /**
      * Constructor.
      *
-     * @param string $cloudName
+     * @param CloudinaryResource|string $cloudName
      */
     public function __construct($cloudName)
     {
-        $this->cloudinary = new CloudinaryResource($cloudName);
+        if ($cloudName instanceof CloudinaryResource) {
+            $this->cloudinary = $cloudName;
+        } elseif (is_string($cloudName)) {
+            $this->cloudinary = new CloudinaryResource($cloudName);
+        } else {
+            throw new \InvalidArgumentException();
+        }
     }
 
     /**
@@ -84,5 +90,28 @@ class CloudinaryExtension extends \Twig_Extension
         $options['type'] = 'fetch';
 
         return $this->cloudinary->getUrl($name, $options);
+    }
+
+    /**
+     * Set cloudinary
+     *
+     * @param CloudinaryResource $resource
+     * @return CloudinaryExtension
+     */
+    public function setCloudinary(CloudinaryResource $resource)
+    {
+        $this->cloudinary = $resource;
+
+        return $this;
+    }
+
+    /**
+     * Get cloudinary
+     *
+     * @return CloudinaryResource
+     */
+    public function getCloudinary()
+    {
+        return $this->cloudinary;
     }
 }

@@ -10,13 +10,17 @@
       "role": "Developer"
     }
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "autoload": {
     "psr-0": {"Cloudinary\\Twig": "lib/"}
   },
   "require": {
     "crocos/cloudinary": "dev-develop",
     "twig/twig": "1.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*",
+    "satooshi/php-coveralls": "dev-master"
   },
   "repositories": [
     {
